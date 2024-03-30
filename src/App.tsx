@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './components/Layout'
-import LoadingScreen from './components/LoadingScreen'
+import ProtectedRoute from './components/ProtectedRoute'
+import CreateAccount from './routes/create-account'
 import Home from './routes/home'
+import Login from './routes/login'
 import Profile from './routes/profile'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: '',
@@ -20,19 +25,21 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: 'create-account',
+    element: <CreateAccount />,
+  },
+  {
+    path: 'login',
+    element: <Login />,
+  },
 ])
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    setInterval(() => {
-      setIsLoading(false)
-    }, 2000)
-  }, [])
-
   return (
-    <>{isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}</>
+    <>
+      <RouterProvider router={router} />
+    </>
   )
 }
 
