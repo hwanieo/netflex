@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Label from '../../components/Label'
 import { supabase } from '../../supabase'
 
 export default function Login() {
@@ -48,17 +49,20 @@ export default function Login() {
 
   return (
     <div className='w-80 m-auto mt-[25%]'>
+      <Label>로그인</Label>
       <form onSubmit={handleSubmit} className='flex flex-col gap-y-2'>
         <input
           onChange={handleChangeEmail}
           name='email'
           type='email'
+          placeholder='Email'
           className='rounded outline-none px-2 py-1 text-black'
         />
         <input
           onChange={handleChangePassword}
           name='password'
           type='password'
+          placeholder='Password'
           className='rounded outline-none px-2 py-1 text-black'
         />
         <button type='submit' className='bg-red-500 rounded px-2 py-1'>

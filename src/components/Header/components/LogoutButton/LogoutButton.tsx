@@ -1,19 +1,14 @@
+import { Link } from 'react-router-dom'
 import { supabase } from '../../../../supabase'
 
 export default function LogoutButton() {
   const handleClick = async () => {
-    try {
-      const { error } = await supabase.auth.signOut()
-      if (error) throw error
-    } catch (error) {
-      console.error(error)
-    } finally {
-      //
-    }
+    await supabase.auth.signOut()
   }
+
   return (
-    <button onClick={handleClick} className='text-lg'>
+    <Link to={'/login'} onClick={handleClick} className='text-lg'>
       로그아웃
-    </button>
+    </Link>
   )
 }
